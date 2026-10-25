@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+.venv/
+venv/
+ENV/
+README.md
+# Project storage
+storage/uploads/*
+!storage/uploads/.gitkeep
+storage/clips/*
+!storage/clips/.gitkeep
+storage/subtitles/*
+!storage/subtitles/.gitkeep
+storage/temp/*
+!storage/temp/.gitkeep
+
+# Models cache
+models/*
+!models/.gitkeep
+
+# Environment variables & editor
+.env
+.vscode/
+.idea/
+*.swp
+*.swo
