@@ -1,0 +1,9 @@
+ How to Run the Application
+
+  1. Activate the virtual environment:
+    .\.venv\Scripts\Activate.ps1
+
+  2. Launch the ClipForge AI Studio:
+    python run.py
+  Or with Uvicorn directly:
+    uvicorn app.main:app --reload --port 8000

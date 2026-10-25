@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+jinja2
+python-multipart
+python-dotenv
+openai-whisper
+yt-dlp
+opencv-python==4.14.0.94

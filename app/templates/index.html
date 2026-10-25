@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esmiringhoy AI - Local Video Studio</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', path='/img/logo.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', path='/img/logo.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}?v=2.2.1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="topbar">
+        <div class="brand">
+            <img src="{{ url_for('static', path='/img/logo.png') }}" alt="Esmiringhoy AI Logo" class="brand-logo">
+            Esmiringhoy <span>AI</span>
+        </div>
+        <div class="badge-status">
+            <span class="status-dot"></span>
+            LOCAL VIDEO STUDIO
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="hero">
+            <p class="eyebrow">AUTOMATED SHORTS & REELS GENERATOR</p>
+            <h1>Turn YouTube videos into <span>viral Shorts.</span></h1>
+            <p class="description">
+                Paste any YouTube URL. ClipForge AI automatically retrieves the high-quality stream,
+                renders a professional 3-section 9:16 vertical layout (with synchronized blurred top/bottom backgrounds),
+                tracks faces with stabilized dynamic framing, intelligently selects between Single-Subject and
+                Stacked 2-View layouts, and burns bold subtitles with professional glow and animations.
+            </p>
+        </section>
+
+        <!-- Project Creator Panel -->
+        <section class="panel">
+            <h2>Start a new project</h2>
+
+            <form id="url-form">
+                <!-- Smart URL Ingestion Omnibar -->
+                <div class="url-input-container">
+                    <div class="omnibar-header">
+                        <label for="youtube-url" class="omnibar-label">YouTube Video URL</label>
+                        <span class="omnibar-tag">Design: Smart URL Ingestion Omnibar</span>
+                    </div>
+                    <div class="url-input-wrapper">
+                        <div class="url-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </div>
+                        <input
+                            type="text"
+                            id="youtube-url"
+                            name="youtube_url"
+                            placeholder="Paste YouTube link here"
+                            required
+                            autocomplete="off"
+                            spellcheck="false"
+                        >
+                        <button type="button" id="btn-paste-url" class="btn-input-action" title="Paste from clipboard">
+                            📋 Paste
+                        </button>
+                        <button type="button" id="btn-validate-url" class="btn-input-action" title="Inspect metadata and check availability">
+                            <span class="btn-validate-text">🔍 Inspect</span>
+                            <span class="btn-validate-spinner hidden" id="validate-spinner"></span>
+                        </button>
+                    </div>
+                    <span class="input-hint">Supports regular YouTube videos, Shorts, and podcasts up to 2 hours.</span>
+                </div>
+
+                <!-- Video Preview Card (shown when validated) -->
+                <div id="video-preview-card" class="video-preview-card hidden">
+                    <img id="preview-thumbnail" src="" alt="Thumbnail" class="preview-thumbnail">
+                    <div class="preview-details">
+                        <span class="preview-badge" id="preview-channel">Channel Name</span>
+                        <h3 id="preview-title" class="preview-title">Video Title</h3>
+                        <div class="preview-meta">
+                            <span id="preview-duration">⏱ 0:00</span>
+                            <span class="verified-tag">✓ Verified & Ready</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="clip-count">Number of clips</label>
+                        <select id="clip-count" name="clip_count">
+                            <option value="3">3 clips (Focused highlights)</option>
+                            <option value="5" selected>5 clips (Recommended)</option>
+                            <option value="10">10 clips (Extended collection)</option>
+                            <option value="20">20 clips (Batch generation)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subtitle-style">Subtitle design</label>
+                        <select id="subtitle-style" name="subtitle_style">
+                            <option value="viral" selected>🔥 Viral Captions (Bold Glow, High-Retention & Animations)</option>
+                            <option value="professional">💼 Professional (Crisp White, Soft Glow & Drop Shadow)</option>
+                            <option value="minimal">✨ Minimalist (Clean & Elegant)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="transition-style">Compilation transitions</label>
+                        <select id="transition-style" name="transition_style">
+                            <option value="fade" selected>Smooth Crossfade (Seamless Blend)</option>
+                            <option value="slideleft">Slide Transition (Dynamic)</option>
+                            <option value="zoomin">Quick Zoom (High-Energy)</option>
+                            <option value="smoothleft">Subtle Motion (Natural Pan)</option>
+                            <option value="cut">Clean Hard Cut (Fast Pacing)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" id="generate-button" class="btn-primary">
+                    <span class="btn-text">Validate URL & Start Processing</span>
+                    <span class="btn-spinner hidden" id="btn-spinner"></span>
+                </button>
+            </form>
+
+            <!-- Progress Monitor Container -->
+            <div id="progress-container" class="progress-box hidden">
+                <div class="progress-header">
+                    <span class="stage-label" id="stage-label">Initializing studio...</span>
+                    <span class="progress-percentage" id="progress-percentage">0%</span>
+                </div>
+                <div class="progress-bar-track">
+                    <div class="progress-bar-fill" id="progress-bar-fill"></div>
+                </div>
+                <p class="progress-info" id="progress-info">Inspecting stream metadata and audio channels...</p>
+            </div>
+
+            <p id="status-message" class="status-msg" role="status"></p>
+        </section>
+
+        <!-- Compilation Reel Banner (shown if multiple clips generated) -->
+        <section id="compilation-section" class="compilation-section hidden">
+            <div class="compilation-card">
+                <div class="compilation-content">
+                    <div class="compilation-badge">FULL REEL COMPILATION</div>
+                    <h2>All Highlights Stitched with Transitions</h2>
+                    <p>Continuous vertical reel combining your top highlights with professional seamless transitions.</p>
+                    <div class="compilation-actions">
+                        <a id="btn-download-compilation" href="#" download class="btn-download-compilation">
+                            Download Full Compilation (.mp4)
+                        </a>
+                    </div>
+                </div>
+                <div class="compilation-video-wrapper">
+                    <video id="compilation-video" controls playsinline preload="metadata">
+                        <source src="" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Generated Clips Results Section -->
+        <section class="results">
+            <div class="results-header">
+                <div>
+                    <h2>Your Generated Clips</h2>
+                    <p class="results-subtitle">Ready to download, share, or publish to TikTok, YouTube Shorts & Instagram Reels.</p>
+                </div>
+                <div id="clips-counter" class="clips-counter hidden">
+                    <span id="clips-count-val">0</span> clips ready
+                </div>
+            </div>
+
+            <div id="empty-state" class="empty-state">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
+                    <line x1="7" y1="2" x2="7" y2="22"></line>
+                    <line x1="17" y1="2" x2="17" y2="22"></line>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <line x1="2" y1="7" x2="7" y2="7"></line>
+                    <line x1="2" y1="17" x2="7" y2="17"></line>
+                    <line x1="17" y1="17" x2="22" y2="17"></line>
+                    <line x1="17" y1="7" x2="22" y2="7"></line>
+                </svg>
+                <p>Your generated vertical clips will appear here once processed.</p>
+            </div>
+
+            <div id="clips-container" class="clips-grid hidden"></div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>ClipForge AI • Local Neural Video Processor • Powered by Whisper AI, OpenCV & FFmpeg</p>
+    </footer>
+
+    <script src="{{ url_for('static', path='/js/main.js') }}?v=2.2.0"></script>
+</body>
+</html>

@@ -8,7 +8,18 @@ env/
 .venv/
 venv/
 ENV/
+
+# Sensitive & private files
 README.md
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+*.pfx
+*.log
+
 # Project storage
 storage/uploads/*
 !storage/uploads/.gitkeep
@@ -23,9 +34,21 @@ storage/temp/*
 models/*
 !models/.gitkeep
 
-# Environment variables & editor
-.env
+# Temporary test artifacts & partial media downloads
+test_temp/
+*.part
+*.ytdl
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.wav
+*.mp3
+
+# Editor & OS files
 .vscode/
 .idea/
 *.swp
 *.swo
+.DS_Store
+Thumbs.db
